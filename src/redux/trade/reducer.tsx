@@ -1,7 +1,6 @@
 import actions from "./actions";
 const initState = {
-  listTrade: [],
-  loading: false
+  listTrade: []
 };
 
 export default function reducer(state = initState, action: any) {
@@ -10,12 +9,6 @@ export default function reducer(state = initState, action: any) {
       return {
         ...state,
         listTrade: action.listTrade,
-        loading: false
-      };
-    case actions.GET_TRADE_LOADING:
-      return {
-        ...state,
-        loading: true,
       };
     default:
       return {

@@ -7,32 +7,24 @@ import isAfter from "date-fns/isAfter";
 import { Table, Tag, Space } from "antd";
 import TradeHistory from "../../components/Page/TradeHistory/TradeHistory";
 const { getListTrade } = tradeActions;
-class DesktopView extends Component<{ listTrade: []; getListTrade: any; loading: boolean }> {
+class DesktopView extends Component<{ listTrade: []; getListTrade: any; loadingTrade: boolean }> {
 
-  constructor(props:any) {
-    super(props);
-    this.state = {
-      loading: this.props.loading
-    };
-  }
 
   componentDidMount() {
-    // this.setState({ loading: false });
+    console.log(this.props.loadingTrade)
     this.props.getListTrade(0, 5);
   }
 
   render() {
     
-    let { listTrade, loading } = this.props;
+    let { listTrade, loadingTrade } = this.props;
+    console.log(loadingTrade);
     // Search onSubmit
     return (
       <div>
         <TradeHistory />
-        {/* <div >
-          ...Loading
-        </div> */}
         {
-          !listTrade.length ? (
+          loadingTrade ? (
             <h1>concac</h1>
           ) : (
             <Table
@@ -52,13 +44,13 @@ class DesktopView extends Component<{ listTrade: []; getListTrade: any; loading:
 
 function mapStateToProps(state: any) {
   const { listTrade } = state.TradeManager;
-  const { loading } = state.TradeManager;
+  const { loadingTrade } = state.LoadingManager;
   return {
     listTrade,
-    loading
+    loadingTrade
   };
 }
 
 export default connect(mapStateToProps, {
-  getListTrade,
+  getListTrade, 
 })(DesktopView);
